@@ -53,5 +53,13 @@ describe('reduce', () => {
     expect(result).toBe(100);
   });
 
+  it('should throw on empty array with no initial value', () => {
+    const arr = [];
+
+    expect(() => {
+      arr.reduce2((acc, val) => acc + val);
+    }).toThrow(TypeError);
+  });
+
   // Add tests here
 });
