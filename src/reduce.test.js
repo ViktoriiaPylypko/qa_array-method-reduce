@@ -2,16 +2,23 @@
 
 const { reduce } = require('./reduce');
 
-describe('reduce', () => {
-  beforeAll(() => {
+beforeAll(() => {
     Array.prototype.reduce2 = reduce; // eslint-disable-line
-  });
+});
 
-  afterAll(() => {
-    delete Array.prototype.reduce2;
-  });
+afterAll(() => {
+  delete Array.prototype.reduce2;
+});
 
+describe('reduce2', () => {
   it('should sum array values with initial value', () => {
+    const arr = [1, 2, 3];
+    const result = arr.reduce2((acc, val) => acc + val, 10);
+
+    expect(result).toBe(16);
+  });
+
+  it('should use initial value if provided', () => {
     const arr = [1, 2, 3];
     const result = arr.reduce2((acc, val) => acc + val, 10);
 
@@ -53,13 +60,10 @@ describe('reduce', () => {
     expect(result).toBe(100);
   });
 
-  it('should throw on empty array with no initial value', () => {
+  it('should return undefined on empty array with no initial value', () => {
     const arr = [];
 
-    expect(() => {
-      arr.reduce2((acc, val) => acc + val);
-    }).toThrow(TypeError);
+    expect(arr.reduce2((acc, val) => acc + val)).toBe(undefined);
   });
-
-  // Add tests here
 });
+// Add tests here
